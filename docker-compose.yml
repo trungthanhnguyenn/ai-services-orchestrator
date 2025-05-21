@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+  mbert_qry:
+    image: heronq02/tritonserver:24.12-cpuonly
+    container_name: mbert_qry
+    ports:
+      - "8011:8001"
+    volumes:
+      - ./models/mbert.qry:/models
+      - ./entry.d:/entry.d
+    entrypoint: ["/entry.d/entrypoint.sh"]
+
+  mbert_ctx:
+    image: heronq02/tritonserver:24.12-cpuonly
+    container_name: mbert_ctx
+    ports:
+      - "8012:8001"
+    volumes:
+      - ./models/mbert.ctx:/models
+      - ./entry.d:/entry.d
+    entrypoint: ["/entry.d/entrypoint.sh"]
+
+  mbert_rerank:
+    image: heronq02/tritonserver:24.12-cpuonly
+    container_name: mbert_rerank
+    ports:
+      - "8013:8001"
+    volumes:
+      - ./models/mbert.rerank:/models
+      - ./entry.d:/entry.d
+    entrypoint: ["/entry.d/entrypoint.sh"]
+
+  sati:
+    image: heronq02/tritonserver:24.12-cpuonly
+    container_name: sati
+    ports:
+      - "8014:8001"
+    volumes:
+      - ./models/sati:/models
+      - ./entry.d:/entry.d
+    entrypoint: ["/entry.d/entrypoint.sh"]
